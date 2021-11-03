@@ -1,11 +1,18 @@
+import { Layout } from 'antd';
 import React from 'react';
-import { AppRouter } from './components';
+
+import { AppRouter, Navbar } from './components';
+
+import './App.css';
 
 const App = () => {
     return (
-        <div>
-            <AppRouter />
-        </div>
+        <Layout>
+            <Navbar />
+            <Layout.Content>
+                <AppRouter />
+            </Layout.Content>
+        </Layout>
     );
 };
 
