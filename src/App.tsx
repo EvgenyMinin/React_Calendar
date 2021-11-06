@@ -9,7 +9,7 @@ const App = () => {
     return (
         <Layout>
             <Navbar />
-            <Layout.Content>
+            <Layout.Content className="content">
                 <AppRouter />
             </Layout.Content>
         </Layout>
