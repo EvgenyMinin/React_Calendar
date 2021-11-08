@@ -19,12 +19,13 @@ export const LoginForm = () => {
     return (
         <Form layout="vertical" onFinish={submitHandler}>
             {error && <Text type="danger">{error}</Text>}
+
             <Form.Item label="Имя пользователя" name="username" rules={[rules.required('Пожалуйста, введите имя пользователя')]}>
-                <Input />
+                <Input placeholder="Пользователь" />
             </Form.Item>
 
             <Form.Item label="Пароль" name="password" rules={[rules.required('Пожалуйста, введите пароль')]}>
-                <Input.Password />
+                <Input.Password placeholder="Пароль" />
             </Form.Item>
 
             <Form.Item>
