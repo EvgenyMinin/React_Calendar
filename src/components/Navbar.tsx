@@ -5,19 +5,20 @@ import { useHistory } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { RouteNames } from '../router';
-import { login, logout } from '../store/reducers/auth';
+import { logout } from '../store/reducers/auth';
 
 export const Navbar = () => {
     const router = useHistory();
-    const { isAuth } = useAppSelector((state) => state.auth);
+    const { isAuth, user } = useAppSelector((state) => state.auth);
     const dispatch = useAppDispatch();
 
     const loginHandler = () => {
-        dispatch(login());
-        router.push(RouteNames.EVENT);
+        router.push(RouteNames.LOGIN);
     };
 
     const logoutHandler = () => {
+        localStorage.removeItem('auth');
+        localStorage.removeItem('username');
         dispatch(logout());
         router.push(RouteNames.LOGIN);
     };
@@ -28,7 +29,7 @@ export const Navbar = () => {
                 {isAuth ? (
                     <>
                         <Col xs={16} md={20}>
-                            <Text type="success">User 1</Text>
+                            <Text type="success">{user.username}</Text>
                         </Col>
                         <Col xs={8} md={4}>
                             <Menu theme="dark" mode="horizontal" selectable={false} style={{ justifyContent: 'flex-end' }}>
