@@ -1,6 +1,6 @@
 export interface Event {
     author: string;
     guest: string;
-    data: string;
+    date: string;
     description: string;
 }

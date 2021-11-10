@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../../../models';
-import { fetchUsers } from './actionCreators';
 
 interface AuthState {
     isAuth: boolean;
@@ -20,28 +19,22 @@ export const authSlice = createSlice({
     name: 'isAuth',
     initialState,
     reducers: {
+        login: (state, { payload }: PayloadAction<User>) => {
+            state.isAuth = true;
+            state.error = '';
+            state.user = payload;
+        },
         logout: (state) => {
             state.isAuth = false;
             state.user = {} as User;
         },
-    },
-    extraReducers: {
-        [fetchUsers.fulfilled.type]: (state, { payload }: PayloadAction<User>) => {
-            state.isAuth = true;
-            state.isLoading = false;
-            state.error = '';
-            state.user = payload;
-        },
-        [fetchUsers.pending.type]: (state) => {
-            state.isLoading = true;
-        },
-        [fetchUsers.rejected.type]: (state, { payload }: PayloadAction<string>) => {
+        setError: (state, { payload }: PayloadAction<string>) => {
             state.isLoading = false;
             state.error = payload;
         },
     },
 });
 
-export const { logout } = authSlice.actions;
+export const { login, logout, setError } = authSlice.actions;
 
 export default authSlice.reducer;

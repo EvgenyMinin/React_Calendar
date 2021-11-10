@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../../../models';
-import { fetchGuests } from './actionCreators';
 
 interface EventState {
     guests: User[];
@@ -17,20 +16,14 @@ const initialState: EventState = {
 export const eventSlice = createSlice({
     name: 'events',
     initialState,
-    reducers: {},
-    extraReducers: {
-        [fetchGuests.fulfilled.type]: (state, { payload }: PayloadAction<User[]>) => {
+    reducers: {
+        setGuests: (state, { payload }: PayloadAction<User[]>) => {
             state.guests = payload;
-            state.isLoading = false;
-        },
-        [fetchGuests.pending.type]: (state) => {
-            state.isLoading = true;
-        },
-        [fetchGuests.rejected.type]: (state, { payload }: PayloadAction<string>) => {
-            state.error = payload;
-            state.isLoading = false;
+            state.error = '';
         },
     },
 });
+
+export const { setGuests } = eventSlice.actions;
 
 export default eventSlice.reducer;
