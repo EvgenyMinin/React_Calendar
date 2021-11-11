@@ -3,9 +3,10 @@ import React from 'react';
 import { Event } from '../models';
 
 interface EventCalendarProps {
-    events: Event[];
+    events: Event[] | undefined;
 }
 
 export const EventCalendar = ({ events }: EventCalendarProps) => {
+    console.log('events cal', events);
     return <Calendar />;
 };

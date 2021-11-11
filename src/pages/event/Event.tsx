@@ -1,28 +1,21 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Card, Modal, Row } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { useFetchAllUsersQuery } from '../../api/UserService';
+import React, { useState } from 'react';
+import { useCreateEventMutation, useFetchAllEventsQuery } from '../../api/UserService';
 
 import { EventCalendar, EventModal, Spinner } from '../../components';
-import { setGuests } from '../../store/reducers/event';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../hooks/redux';
 import { Event as IEvent } from '../../models';
 
 export const Event = () => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const dispatch = useAppDispatch();
-    const { data, isLoading } = useFetchAllUsersQuery();
+    const [createEvent] = useCreateEventMutation();
+    const { data: events, isLoading } = useFetchAllEventsQuery();
+
     const { guests } = useAppSelector((state) => state.events);
 
-    useEffect(() => {
-        if (data && !isLoading) {
-            dispatch(setGuests(data));
-        }
-        // eslint-disable-next-line
-    }, [isLoading]);
-
-    const submit = (event: IEvent) => {
-        console.log('event', event);
+    const submit = async (event: IEvent) => {
+        await createEvent(event);
         setIsVisible(false);
     };
 
@@ -33,7 +26,7 @@ export const Event = () => {
             ) : (
                 <Row justify="center" align="middle" className="content">
                     <Card>
-                        <EventCalendar events={[]} />
+                        <EventCalendar events={events} />
                         <Row justify="center">
                             <Button type="primary" onClick={() => setIsVisible(true)} icon={<PlusOutlined />}>
                                 Добавить событие

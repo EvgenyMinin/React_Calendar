@@ -1,6 +1,35 @@
 {
-    "users": [
-        { "username": "admin", "password": "admin" },
-        { "username": "root", "password": "root" }
-    ]
+  "users": [
+    {
+      "username": "admin",
+      "password": "admin"
+    },
+    {
+      "username": "root",
+      "password": "root"
+    }
+  ],
+  "events": [
+    {
+      "author": "admin",
+      "date": "08.11.2021",
+      "description": "тестовое событие",
+      "guest": "admin",
+      "id": 1
+    },
+    {
+      "author": "admin",
+      "date": "08.11.2021",
+      "description": "тестовое событие 2",
+      "guest": "admin",
+      "id": 2
+    },
+    {
+      "author": "admin",
+      "date": "01.11.2021",
+      "description": "событие 2",
+      "guest": "admin",
+      "id": 3
+    }
+  ]
 }
