@@ -13,23 +13,16 @@
     {
       "author": "admin",
       "date": "08.11.2021",
-      "description": "тестовое событие",
+      "description": "событие для админа",
       "guest": "admin",
       "id": 1
     },
     {
       "author": "admin",
-      "date": "08.11.2021",
-      "description": "тестовое событие 2",
-      "guest": "admin",
+      "date": "11.11.2021",
+      "description": "событие для рута",
+      "guest": "root",
       "id": 2
-    },
-    {
-      "author": "admin",
-      "date": "01.11.2021",
-      "description": "событие 2",
-      "guest": "admin",
-      "id": 3
     }
   ]
 }
