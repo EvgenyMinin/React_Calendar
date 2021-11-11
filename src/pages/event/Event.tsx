@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Card, Modal, Row } from 'antd';
+import { Button, Card, Modal, notification, Row } from 'antd';
 import React, { useState } from 'react';
 import { useCreateEventMutation, useFetchAllEventsQuery } from '../../api/UserService';
 
@@ -10,7 +10,7 @@ import { Event as IEvent } from '../../models';
 export const Event = () => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const [createEvent] = useCreateEventMutation();
-    const { data: events, isLoading } = useFetchAllEventsQuery();
+    const { data: events, isLoading, isError } = useFetchAllEventsQuery();
 
     const { guests } = useAppSelector((state) => state.events);
 
@@ -18,6 +18,13 @@ export const Event = () => {
         await createEvent(event);
         setIsVisible(false);
     };
+
+    if (isError) {
+        notification.error({
+            message: 'Упс!',
+            description: 'Что-то пошло не так, попробуйте позже',
+        });
+    }
 
     return (
         <>
