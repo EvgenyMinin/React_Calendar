@@ -12,7 +12,7 @@ export const AppRouter = () => {
                 <Route key={route.path} {...route} />
             ))}
 
-            <Redirect to={RouteNames.EVENT} />
+            <Redirect to={RouteNames.EVENTS} />
         </Switch>
     ) : (
         <Switch>

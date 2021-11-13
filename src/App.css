@@ -3,3 +3,11 @@
 .content {
     min-height: calc(100vh - 64px);
 }
+
+.eventItemContainer {
+    margin-bottom: 12px;
+}
+
+.eventItemContainer:first-child {
+    margin-top: 24px;
+}

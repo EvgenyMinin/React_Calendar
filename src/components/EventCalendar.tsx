@@ -1,18 +1,18 @@
 import { Calendar } from 'antd';
 import { Moment } from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useAppSelector } from '../hooks/redux';
-import { Event } from '../models';
 import { formatDate } from '../utils/formatDate';
 
-interface EventCalendarProps {
-    events: Event[] | undefined;
-}
+export const EventCalendar = () => {
+    const [selectedData, setSelectedData] = useState<Moment>();
+    const { events } = useAppSelector((state) => state.events);
+    const router = useHistory();
 
-export const EventCalendar = ({ events }: EventCalendarProps) => {
-    const { username } = useAppSelector((state) => state.auth.user);
     const dateCellRender = (value: Moment) => {
-        const currentDayEvents = events?.filter((event) => event.date === formatDate(value) && event.guest === username);
+        const currentDayEvents = events?.filter((event) => event.date === formatDate(value));
+
         return (
             <div>
                 {currentDayEvents?.map((ev) => (
@@ -22,5 +22,10 @@ export const EventCalendar = ({ events }: EventCalendarProps) => {
         );
     };
 
-    return <Calendar dateCellRender={dateCellRender} />;
+    const selectDateHandler = (currentDate: Moment) => {
+        setSelectedData(currentDate);
+        router.push(`/events/${currentDate.format('DD.MM.YYYY')}`);
+    };
+
+    return <Calendar dateCellRender={dateCellRender} value={selectedData} onSelect={selectDateHandler} />;
 };

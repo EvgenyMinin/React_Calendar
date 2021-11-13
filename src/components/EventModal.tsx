@@ -1,6 +1,6 @@
+import moment, { Moment } from 'moment';
 import { AppstoreAddOutlined } from '@ant-design/icons';
-import { Button, DatePicker, Form, Input, Row, Select } from 'antd';
-import { Moment } from 'moment';
+import { Button, Col, DatePicker, Form, Input, Row, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useFetchAllUsersQuery } from '../api/UserService';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
@@ -9,6 +9,8 @@ import { Event, User } from '../models';
 import { setGuests } from '../store/reducers/event';
 import { formatDate } from '../utils/formatDate';
 import { rules } from '../utils/rules';
+
+import './EventModal.css';
 
 interface EventModalProps {
     guests: User[];
@@ -45,6 +47,10 @@ export const EventModal = ({ guests, submit }: EventModalProps) => {
         submit({ ...event, author: user.username });
     };
 
+    const disabledDate = (currentDate: Moment) => {
+        return currentDate && currentDate < moment().endOf('day');
+    };
+
     return (
         <Form layout="vertical" onFinish={submitForm}>
             <Form.Item label="Описание события" name="description" rules={[rules.required('Пожалуйста, укажите событие')]}>
@@ -57,9 +63,13 @@ export const EventModal = ({ guests, submit }: EventModalProps) => {
                 />
             </Form.Item>
 
-            <Form.Item label="Дата события" name="date" rules={[rules.required('Пожалуйста, укажите дату события')]}>
-                <DatePicker onChange={(date) => selectDate(date)} />
-            </Form.Item>
+            <Row>
+                <Col xs={24} md={12}>
+                    <Form.Item label="Дата события" name="date" rules={[rules.required('Пожалуйста, укажите дату события')]}>
+                        <DatePicker disabledDate={disabledDate} onChange={(date) => selectDate(date)} className="datePicker" />
+                    </Form.Item>
+                </Col>
+            </Row>
 
             <Form.Item label="Гость" name="guest" rules={[rules.required('Пожалуйста, выберите гостя')]}>
                 <Select placeholder="Выберите гостя" onChange={(guest: string) => setEvent({ ...event, guest })}>
