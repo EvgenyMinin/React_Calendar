@@ -29,7 +29,9 @@ export const Navbar = () => {
                 {isAuth ? (
                     <>
                         <Col xs={16} md={20}>
-                            <Text type="success">{user.username}</Text>
+                            <Text type="success" onClick={() => router.push(RouteNames.EVENTS)} style={{ cursor: 'pointer' }}>
+                                {user.username}
+                            </Text>
                         </Col>
                         <Col xs={8} md={4}>
                             <Menu theme="dark" mode="horizontal" selectable={false} style={{ justifyContent: 'flex-end' }}>
