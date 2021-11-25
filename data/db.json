@@ -1,28 +1,30 @@
 {
-  "users": [
-    {
-      "username": "admin",
-      "password": "admin"
-    },
-    {
-      "username": "root",
-      "password": "root"
-    }
-  ],
-  "events": [
-    {
-      "author": "admin",
-      "date": "08.11.2021",
-      "description": "событие для админа",
-      "guest": "admin",
-      "id": 1
-    },
-    {
-      "author": "admin",
-      "date": "11.11.2021",
-      "description": "событие для рута",
-      "guest": "root",
-      "id": 2
-    }
-  ]
+    "users": [
+        {
+            "id": "1",
+            "username": "admin",
+            "password": "admin"
+        },
+        {
+            "id": "2",
+            "username": "root",
+            "password": "root"
+        }
+    ],
+    "events": [
+        {
+            "author": "admin",
+            "date": "08.11.2021",
+            "description": "событие для админа",
+            "guest": "admin",
+            "id": 1
+        },
+        {
+            "author": "admin",
+            "date": "11.11.2021",
+            "description": "событие для рута",
+            "guest": "root",
+            "id": 2
+        }
+    ]
 }

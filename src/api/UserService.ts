@@ -13,6 +13,15 @@ export const api = createApi({
             providesTags: ['User'],
         }),
 
+        createUser: builder.mutation<User, User>({
+            query: (user: User) => ({
+                url: '/users',
+                method: 'POST',
+                body: user,
+            }),
+            invalidatesTags: ['User'],
+        }),
+
         fetchAllEvents: builder.query<Event[], void>({
             query: () => 'events',
             providesTags: () => ['Event'],
@@ -38,4 +47,4 @@ export const api = createApi({
     }),
 });
 
-export const { useFetchAllUsersQuery, useCreateEventMutation, useFetchAllEventsQuery, useDeleteEventMutation } = api;
+export const { useFetchAllUsersQuery, useCreateEventMutation, useFetchAllEventsQuery, useDeleteEventMutation, useCreateUserMutation } = api;

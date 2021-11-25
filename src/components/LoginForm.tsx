@@ -1,12 +1,14 @@
-import { Alert, Button, Form, Input } from 'antd';
+import { Alert, Button, Form, Input, Row, Typography } from 'antd';
 import React from 'react';
 import { LoginOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { User } from '../models';
 import { login, setError } from '../store/reducers/auth';
 import { rules } from '../utils/rules';
 import { useFetchAllUsersQuery } from '../api/UserService';
+import { RouteNames } from '../router';
 
 export const LoginForm = () => {
     const dispatch = useAppDispatch();
@@ -27,6 +29,12 @@ export const LoginForm = () => {
 
     return (
         <Form layout="vertical" onFinish={submitHandler}>
+            <Row justify="center">
+                <Typography.Title level={2} type="secondary">
+                    Вход
+                </Typography.Title>
+            </Row>
+
             {isError && <Alert message="Что-то пошло не так, попробуйте позже" type="error" showIcon />}
 
             <Form.Item label="Имя пользователя" name="username" rules={[rules.required('Пожалуйста, введите имя пользователя')]}>
@@ -42,10 +50,17 @@ export const LoginForm = () => {
                 </Form.Item>
             )}
             <Form.Item>
-                <Button type="primary" htmlType="submit" loading={isLoading} icon={<LoginOutlined />}>
+                <Button type="primary" htmlType="submit" loading={isLoading} icon={<LoginOutlined />} block>
                     Войти
                 </Button>
             </Form.Item>
+
+            <Row justify="center">
+                <Typography.Text>
+                    Еще нет аккунта?&nbsp;
+                    <Link to={RouteNames.SIGN_UP}>Зарегистрируйтесь!</Link>
+                </Typography.Text>
+            </Row>
         </Form>
     );
 };
